@@ -1,0 +1,17 @@
+# Ignorar arquivos compilados
+# Ignorar pastas de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+cache/
+
+#ignorar arquivos de dados
+dados/dados_baixados/*
+dados/dados_tratados/*
+dados/dados_processados/*
+.venv
+#não ignorar .gitkeep
+!dados/dados_baixados/.gitkeep
+!dados/dados_tratados/.gitkeep
+!dados/dados_processados/.gitkeep
