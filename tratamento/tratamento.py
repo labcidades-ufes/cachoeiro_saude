@@ -38,7 +38,7 @@ def obter_hexagonos_cachoeiro_de_itapemirim():
         print("Nenhuma interseção encontrada para o município de Cachoeiro de Itapemirim.")
 
     # salva o arquivo
-    intersected.to_file(os.path.join("dados", "dados_tratados", "population_cachoeiro_de_itapemirim_centroides.geojson"), driver='GeoJSON')
+    intersected.to_file(os.path.join("dados", "dados_tratados", "population_cachoeiro_de_itapemirim.geojson"), driver='GeoJSON')
     print("População de Cachoeiro de Itapemirim criada.")
 
 
