@@ -8,8 +8,7 @@ import math
 
 def obter_centroides():
     # Definir o caminho relativo
-    caminho_geojson_population_cachoeiro_de_itapemirim = os.path.join(
-        "..", "dados", "dados_tratados", "population_cachoeiro_de_itapemirim.geojson")
+    caminho_geojson_population_cachoeiro_de_itapemirim = os.path.join("dados", "dados_tratados", "population_cachoeiro_de_itapemirim.geojson")
 
     # Carregar os dados
     gdf_population_cachoeiro_de_itapemirim = gpd.read_file(caminho_geojson_population_cachoeiro_de_itapemirim)
@@ -26,29 +25,24 @@ def obter_centroides():
     gdf_centroides.set_geometry('centroid', inplace=True)
 
     # salva o arquivo
-    gdf_centroides.to_file(os.path.join("..", "dados", "dados_processados",
-                           "population_cachoeiro_de_itapemirim_centroides.geojson"), driver='GeoJSON')
+    gdf_centroides.to_file(os.path.join("dados", "dados_processados", "population_cachoeiro_de_itapemirim_centroides.geojson"), driver='GeoJSON')
     print("Centroides criados.")
 
 
 # Função para obter um polígono expandido da área de Cachoeiro de Itapemirim
 def obter_dados_viarios_expandido(buffer_size=5000):
     # Definir o caminho relativo
-    caminho_municipio = os.path.join(
-        "..", "dados", "dados_tratados", "limite_municipio_cachoeiro_de_itapemirim.geojson")
+    caminho_municipio = os.path.join("dados", "dados_tratados", "limite_municipio_cachoeiro_de_itapemirim.geojson")
 
     # Carregar os dados
     municipio_cachoeiro_de_itapemirim = gpd.read_file(caminho_municipio)
 
     # ajusta o crs
-    municipio_cachoeiro_de_itapemirim = municipio_cachoeiro_de_itapemirim.to_crs(
-        epsg=31984)
+    municipio_cachoeiro_de_itapemirim = municipio_cachoeiro_de_itapemirim.to_crs(epsg=31984)
 
     # Criar um buffer ao redor do município (em graus)
-    municipio_cachoeiro_de_itapemirim_buffered = municipio_cachoeiro_de_itapemirim.buffer(
-        buffer_size)
-    municipio_cachoeiro_de_itapemirim_buffered = municipio_cachoeiro_de_itapemirim_buffered.to_crs(
-        epsg=4674)
+    municipio_cachoeiro_de_itapemirim_buffered = municipio_cachoeiro_de_itapemirim.buffer(buffer_size)
+    municipio_cachoeiro_de_itapemirim_buffered = municipio_cachoeiro_de_itapemirim_buffered.to_crs(epsg=4674)
 
     # Definir um polígono ao redor de Cachoeiro de Itapemirim
     polygon = municipio_cachoeiro_de_itapemirim_buffered.unary_union
@@ -68,24 +62,19 @@ def obter_dados_viarios_expandido(buffer_size=5000):
     gdf_viario = ox.graph_to_gdfs(G, nodes=False)
 
     # salva o geodataframe
-    gdf_viario.to_file(os.path.join("..", "dados", "dados_processados",
-                       "viario_expandido_cachoeiro_de_itapemirim.geojson"), driver='GeoJSON')
+    gdf_viario.to_file(os.path.join("dados", "dados_processados", "viario_expandido_cachoeiro_de_itapemirim.geojson"), driver='GeoJSON')
     print("Rede viaria expandida criada.")
 
     # Salvar o grafo em formato GraphML
-    ox.save_graphml(G, filepath=os.path.join(
-        "..", "dados", "dados_processados", "grafo_viario_expandido_cachoeiro_de_itapemirim.graphml"))
+    ox.save_graphml(G, filepath=os.path.join("dados", "dados_processados", "grafo_viario_expandido_cachoeiro_de_itapemirim.graphml"))
 
 
 # Função para calcular e desenhar a rota mais curta
 def obter_rotas_centroide_para_saude():
     # Definir o caminho relativo
-    caminho_grafo = os.path.join(
-        "..", "dados", "dados_processados", "grafo_viario_expandido_cachoeiro_de_itapemirim.graphml")
-    caminho_geojson_population_cachoeiro_de_itapemirim_centroides = os.path.join(
-        "..", "dados", "dados_processados", "population_cachoeiro_de_itapemirim_centroides.geojson")
-    caminho_geojson_unidades_saude_cachoeiro_de_itapemirim = os.path.join(
-        "..", "dados", "dados_tratados", "unidades_saude_cachoeiro_de_itapemirim.geojson")
+    caminho_grafo = os.path.join("dados", "dados_processados", "grafo_viario_expandido_cachoeiro_de_itapemirim.graphml")
+    caminho_geojson_population_cachoeiro_de_itapemirim_centroides = os.path.join("dados", "dados_processados", "population_cachoeiro_de_itapemirim_centroides.geojson")
+    caminho_geojson_unidades_saude_cachoeiro_de_itapemirim = os.path.join("dados", "dados_tratados", "unidades_saude_cachoeiro_de_itapemirim.geojson")
 
     # Carregar os dados
     grafo_viario = ox.load_graphml(caminho_grafo)
@@ -139,21 +128,16 @@ def obter_rotas_centroide_para_saude():
     gdf_rotas = gpd.GeoDataFrame(rotas, crs="EPSG:31984")
 
     # salva o geodataframe
-    gdf_rotas.to_file(os.path.join(
-        "..", "dados", "dados_processados", "rotas.geojson"), driver='GeoJSON')
+    gdf_rotas.to_file(os.path.join("dados", "dados_processados", "rotas.geojson"), driver='GeoJSON')
     print("\nRotas para unidades de saúde criadas.")
 
 
 def obter_gdf_peso_hexagonos():
     # Definir o caminho relativo
-    caminho_grafo = os.path.join(
-        "..", "dados", "dados_processados", "grafo_viario_expandido_cachoeiro_de_itapemirim.graphml")
-    caminho_geojson_population_cachoeiro_de_itapemirim = os.path.join(
-        "..", "dados", "dados_tratados", "population_cachoeiro_de_itapemirim.geojson")
-    caminho_geojson_population_cachoeiro_de_itapemirim_centroides = os.path.join(
-        "..", "dados", "dados_processados", "population_cachoeiro_de_itapemirim_centroides.geojson")
-    caminho_geojson_unidades_saude_cachoeiro_de_itapemirim = os.path.join(
-        "..", "dados", "dados_tratados", "unidades_saude_cachoeiro_de_itapemirim.geojson")
+    caminho_grafo = os.path.join("dados", "dados_processados", "grafo_viario_expandido_cachoeiro_de_itapemirim.graphml")
+    caminho_geojson_population_cachoeiro_de_itapemirim = os.path.join("dados", "dados_tratados", "population_cachoeiro_de_itapemirim.geojson")
+    caminho_geojson_population_cachoeiro_de_itapemirim_centroides = os.path.join("dados", "dados_processados", "population_cachoeiro_de_itapemirim_centroides.geojson")
+    caminho_geojson_unidades_saude_cachoeiro_de_itapemirim = os.path.join("dados", "dados_tratados", "unidades_saude_cachoeiro_de_itapemirim.geojson")
 
     # Carregar os dados
     grafo_viario = ox.load_graphml(caminho_grafo)
@@ -193,8 +177,7 @@ def obter_gdf_peso_hexagonos():
 
         # Calcular a rota mais curta entre os nós usando o peso 'length' (distância em metros)
         try:
-            distancia = nx.shortest_path_length(
-                grafo_viario, nodo_origem, nodo_destino, weight='length')
+            distancia = nx.shortest_path_length(grafo_viario, nodo_origem, nodo_destino, weight='length')
 
             gdf_hexagonos.at[idx, 'distancia'] = distancia
 
@@ -207,12 +190,10 @@ def obter_gdf_peso_hexagonos():
         print(f"Distancia {idx} de {len(gdf_hexagonos)}.", end='\r')
 
     # Selecionar apenas as colunas desejadas para o novo arquivo de hexágonos
-    gdf_novo_hexagonos = gdf_hexagonos[[
-        'h3', 'geometry', 'population', 'peso', 'distancia', 'log_population']]
+    gdf_novo_hexagonos = gdf_hexagonos[['h3', 'geometry', 'population', 'peso', 'distancia', 'log_population']]
 
     # Ignorar os valores onde a distância é 'None'
-    gdf_novo_hexagonos = gdf_novo_hexagonos[gdf_novo_hexagonos['distancia'].notnull(
-    )]
+    gdf_novo_hexagonos = gdf_novo_hexagonos[gdf_novo_hexagonos['distancia'].notnull()]
 
     # media da coluna distancia
     media_distancia = gdf_novo_hexagonos['distancia'].mean()
@@ -229,8 +210,7 @@ def obter_gdf_peso_hexagonos():
         distancia = row['distancia']
 
         # Normalizar população e distância e fazer um shift para acabar com valores negativos
-        norm_population = (
-            (math.log(population) - media_log_population) / std_log_population) + 10
+        norm_population = ((math.log(population) - media_log_population) / std_log_population) + 10
         norm_distancia = ((distancia - media_distancia) / std_distancia) + 10
 
         # Calcular o valor de 'peso' como soma das normalizações
@@ -245,6 +225,5 @@ def obter_gdf_peso_hexagonos():
     gdf_novo_hexagonos = gdf_novo_hexagonos.to_crs(epsg=31984)
 
     # salva o geodataframe
-    gdf_novo_hexagonos.to_parquet(os.path.join(
-        "..", "dados", "dados_processados", "peso_hexagonos.parquet"))
+    gdf_novo_hexagonos.to_parquet(os.path.join("dados", "dados_processados", "peso_hexagonos.parquet"))
     print("\nPesos criados.")

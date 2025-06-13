@@ -15,14 +15,14 @@ def criar_mapa():
     zoom_inicial = 10
 
     # Definir o caminho relativo
-    caminho_municipio = os.path.join("..", "dados", "dados_tratados", "limite_municipio_cachoeiro_de_itapemirim.geojson")
-    caminho_geojson_unidades_saude_cachoeiro_de_itapemirim = os.path.join("..", "dados", "dados_tratados", "unidades_saude_cachoeiro_de_itapemirim.geojson")
+    caminho_municipio = os.path.join("dados", "dados_tratados", "limite_municipio_cachoeiro_de_itapemirim.geojson")
+    caminho_geojson_unidades_saude_cachoeiro_de_itapemirim = os.path.join("dados", "dados_tratados", "unidades_saude_cachoeiro_de_itapemirim.geojson")
     #caminho_geojson_unidades_saude_alegre_apoio = os.path.join("..", "dados", "dados_tratados", "unidades_saude_apoio_alegre.geojson")
-    caminho_geojson_population_cachoeiro_de_itapemirim = os.path.join("..", "dados", "dados_tratados", "population_cachoeiro_de_itapemirim.geojson")
-    caminho_geojson_population_cachoeiro_de_itapemirim_centroides = os.path.join("..", "dados", "dados_processados", "population_cachoeiro_de_itapemirim_centroides.geojson")
-    caminho_geojson_viario_expandido = os.path.join("..", "dados", "dados_processados", "viario_expandido_cachoeiro_de_itapemirim.geojson")
-    caminho_geojson_rotas = os.path.join("..", "dados", "dados_processados", "rotas.geojson")
-    caminho_geojson_peso_hexagonos = os.path.join("..", "dados", "dados_processados", "peso_hexagonos.parquet")
+    caminho_geojson_population_cachoeiro_de_itapemirim = os.path.join("dados", "dados_tratados", "population_cachoeiro_de_itapemirim.geojson")
+    caminho_geojson_population_cachoeiro_de_itapemirim_centroides = os.path.join("dados", "dados_processados", "population_cachoeiro_de_itapemirim_centroides.geojson")
+    caminho_geojson_viario_expandido = os.path.join("dados", "dados_processados", "viario_expandido_cachoeiro_de_itapemirim.geojson")
+    caminho_geojson_rotas = os.path.join("dados", "dados_processados", "rotas.geojson")
+    caminho_geojson_peso_hexagonos = os.path.join("dados", "dados_processados", "peso_hexagonos.parquet")
 
     # Carregar os dados
     gdf_municipio_cachoeiro_de_itapemirim = gpd.read_file(caminho_municipio)

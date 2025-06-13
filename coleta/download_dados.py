@@ -32,12 +32,10 @@ def download_limites_municipios():
         # Criar o diretório "data" se não existir
         # os.makedirs(os.path.dirname(caminho_arquivo), exist_ok=True)
 
-        caminho_arquivo = os.path.join(
-            "..", "dados", "dados_baixados", "limites_municipios_ES.geojson")
+        caminho_arquivo = os.path.join("dados", "dados_baixados", "limites_municipios_ES.geojson")
 
         # Salvar o resultado GeoJSON no arquivo
-        total_tamanho = int(response.headers.get(
-            'content-length', 0))  # Tamanho total do arquivo
+        total_tamanho = int(response.headers.get('content-length', 0))  # Tamanho total do arquivo
         tamanho_downloaded = 0
 
         with open(caminho_arquivo, "wb") as file:
@@ -80,12 +78,10 @@ def download_unidades_saude_ES():
     # Verificar se a requisição foi bem-sucedida
     if response.status_code == 200:
         # Definir o caminho do arquivo para salvar
-        caminho_arquivo = os.path.join(
-            "..", "dados", "dados_baixados", "unidades_saude_ES.geojson")
+        caminho_arquivo = os.path.join("dados", "dados_baixados", "unidades_saude_ES.geojson")
 
         # Salvar o resultado GeoJSON no arquivo
-        total_tamanho = int(response.headers.get(
-            'content-length', 0))  # Tamanho total do arquivo
+        total_tamanho = int(response.headers.get('content-length', 0))  # Tamanho total do arquivo
         tamanho_downloaded = 0
 
         with open(caminho_arquivo, "wb") as file:
@@ -109,10 +105,8 @@ def download_population_cachoeiro():
     nome_arquivo_gpkg = "kontur_population_BR_20231101.gpkg"
 
     # Caminho para salvar o arquivo baixado
-    caminho_arquivo_gz = os.path.join(
-        "..", "dados", "dados_baixados", nome_arquivo_gpkg + ".gz")
-    caminho_arquivo_gpkg = os.path.join(
-        "..", "dados", "dados_baixados", nome_arquivo_gpkg)
+    caminho_arquivo_gz = os.path.join("dados", "dados_baixados", nome_arquivo_gpkg + ".gz")
+    caminho_arquivo_gpkg = os.path.join("dados", "dados_baixados", nome_arquivo_gpkg)
 
     # Baixar o arquivo
     print("Baixando arquivo kontur_population_BR_20231101.gpkg ...")
